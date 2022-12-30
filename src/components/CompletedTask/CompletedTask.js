@@ -4,7 +4,7 @@ import SingleTask from '../MyTasks/SingleTask/SingleTask';
 const CompletedTask = () => {
     const [tasks, setTasks] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/completed')
+        fetch('https://my-task-master-server.vercel.app/completed')
             .then(res => res.json())
             .then(data => {
                 setTasks(data);

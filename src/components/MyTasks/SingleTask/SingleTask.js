@@ -10,7 +10,7 @@ const SingleTask = ({ task, tasks, setTasks }) => {
     const [taskComment, setTaskComment] = useState(task?.comment);
 
     const handleComplete = (id) => {
-        fetch(`http://localhost:5000/tasks?id=${id}`, {
+        fetch(`https://my-task-master-server.vercel.app/tasks?id=${id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -22,7 +22,7 @@ const SingleTask = ({ task, tasks, setTasks }) => {
     }
 
     const handleNotComplete = id => {
-        fetch(`http://localhost:5000/completed?id=${id}`, {
+        fetch(`https://my-task-master-server.vercel.app/completed?id=${id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -35,7 +35,7 @@ const SingleTask = ({ task, tasks, setTasks }) => {
 
     const handleDelete = (id) => {
 
-        fetch(`http://localhost:5000/tasks?id=${id}`, {
+        fetch(`https://my-task-master-server.vercel.app/tasks?id=${id}`, {
             method: 'DELETE',
         })
             .then(res => res.json())
@@ -49,7 +49,7 @@ const SingleTask = ({ task, tasks, setTasks }) => {
 
     const handleEdit = (e, id) => {
         e.preventDefault();
-        fetch(`http://localhost:5000/edittask?id=${id}&editTask=${editTask}`, {
+        fetch(`https://my-task-master-server.vercel.app/edittask?id=${id}&editTask=${editTask}`, {
             method: 'PATCH'
         })
             .then(res => res.json())
@@ -67,12 +67,12 @@ const SingleTask = ({ task, tasks, setTasks }) => {
 
     const handleComment = (e, id) => {
         if (e.key === 'Enter') {
-            fetch(`http://localhost:5000/comment?id=${id}`, {
+            fetch(`https://my-task-master-server.vercel.app/comment?id=${id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'
                 },
-                body: JSON.stringify({taskComment})
+                body: JSON.stringify({ taskComment })
             })
                 .then(res => res.json())
                 .then(data => {
@@ -102,7 +102,7 @@ const SingleTask = ({ task, tasks, setTasks }) => {
                 <div className=' relative text-2xl flex gap-2 '>
                     {!task.isCompleted &&
 
-                        <span className="icon" onClick={() => {
+                        <span className="icon cursor-pointer" onClick={() => {
                             if (!edit && !task.isCompleted) {
                                 setEdit(!edit);
                             }
@@ -110,21 +110,21 @@ const SingleTask = ({ task, tasks, setTasks }) => {
                             <FaEdit />
                         </span>
                     }
-                    <span className="icon" onClick={() => handleDelete(task._id)}>
+                    <span className="icon cursor-pointer" onClick={() => handleDelete(task._id)}>
                         <FaTrashAlt />
                     </span>
                     {
                         task.isCompleted ?
                             <>
-                                <span className="icon" onClick={() => handleNotComplete(task._id)}>
+                                <span className="icon cursor-pointer" onClick={() => handleNotComplete(task._id)}>
                                     <FaUndo />
                                 </span>
-                                <span className="icon" onClick={() => { setShowComment(!showComment) }}>
+                                <span className="icon cursor-pointer" onClick={() => { setShowComment(!showComment) }}>
                                     <FaRegCommentAlt />
                                 </span>
                             </>
                             :
-                            <span className="icon" onClick={() => handleComplete(task._id)}>
+                            <span className="icon cursor-pointer" onClick={() => handleComplete(task._id)}>
                                 <MdDone />
                             </span>
                     }

@@ -20,7 +20,7 @@ const AddTask = () => {
                 .then(data => {
                     if (data.success) {
                         singleTask.image = data.data.url;
-                        fetch('http://localhost:5000/tasks', {
+                        fetch('https://my-task-master-server.vercel.app/tasks', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
@@ -45,7 +45,7 @@ const AddTask = () => {
                 })
         }
         else {
-            fetch('http://localhost:5000/tasks', {
+            fetch('https://my-task-master-server.vercel.app/tasks', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
