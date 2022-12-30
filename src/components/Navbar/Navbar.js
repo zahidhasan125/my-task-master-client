@@ -31,6 +31,7 @@ const Navbar = () => {
         themeSwitch();
     }
     themeCheck();
+
     return (
         <div className='flex w-full md:w-[95%] max-w-7xl mx-auto bg-[#457b9d] dark:bg-stone-900 h-16 px-4 mb-6 text-white items-center justify-between rounded-xl '>
             <h1 className='text-3xl font-extrabold uppercase border-2 border-double rounded-md'>Task-Master</h1>
@@ -47,7 +48,7 @@ const Navbar = () => {
                     <Link to="/completed"><li className='bg-[#1d3557] px-2 py-1 rounded-lg font-bold cursor-pointer'>Completed Task</li></Link>
                     <Link to="/"><li className='bg-[#1d3557] px-2 py-1 rounded-lg font-bold cursor-pointer'>+ Add Task</li></Link>
                     {
-                        <Link to="/"><li className='bg-gradient-to-tr from-[#1d3557] via-sky-600  to-sky-900  px-2 py-1 rounded-lg font-bold cursor-pointer'>Login<BiLogIn className='inline ml-1' /></li></Link>
+                        <Link to="/login"><li className='bg-gradient-to-tr from-[#1d3557] via-sky-600  to-sky-900  px-2 py-1 rounded-lg font-bold cursor-pointer'>Login<BiLogIn className='inline ml-1' /></li></Link>
                     }
                 </ul>
             </label>
@@ -64,7 +65,7 @@ const Navbar = () => {
 
                     <Link to="/"><li className='bg-[#1d3557] px-2 py-1 rounded-lg font-bold cursor-pointer'>+ Add Task</li></Link>
                     {
-                        <Link to="/"><li className='bg-gradient-to-tr from-[#1d3557] via-sky-600  to-sky-900  px-2 py-1 rounded-lg font-bold cursor-pointer'>Login<BiLogIn className='inline ml-1' /></li></Link>
+                        <Link to="/login"><li className='bg-gradient-to-tr from-[#1d3557] via-sky-600  to-sky-900  px-2 py-1 rounded-lg font-bold cursor-pointer'>Login<BiLogIn className='inline ml-1' /></li></Link>
                     }
                     <label className="inline-flex relative items-center cursor-pointer">
                         <input type="checkbox" onClick={handleDarkMode} value="" className="sr-only peer" defaultChecked={isDark === 'dark' ? true : false} />
