@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaEdit, FaTrashAlt, FaUndo, FaRegCommentAlt } from 'react-icons/fa';
 import { MdDone } from 'react-icons/md';
 import './SingleTask.css';
+import { toast } from 'react-hot-toast';
 
 const SingleTask = ({ task, tasks, setTasks }) => {
     const [edit, setEdit] = useState(false);
@@ -16,6 +17,7 @@ const SingleTask = ({ task, tasks, setTasks }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
+                    toast.success('Moved to Completed Task Successfully!');
                     setTasks(tasks.map(task => task._id === id ? { ...task, isCompleted: !task.isCompleted } : task))
                 }
             })
@@ -28,6 +30,7 @@ const SingleTask = ({ task, tasks, setTasks }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
+                    toast.success('Moved to My Task Successfully!');
                     setTasks(tasks.map(task => task._id === id ? { ...task, isCompleted: !task.isCompleted } : task))
                 }
             })
@@ -42,7 +45,7 @@ const SingleTask = ({ task, tasks, setTasks }) => {
             .then(data => {
                 if (data.deletedCount > 0) {
                     setTasks(tasks.filter(task => task._id !== id))
-                    alert('Deleted Successfully!')
+                    toast.success('Deleted Successfully!')
                 }
             })
     }
@@ -55,6 +58,7 @@ const SingleTask = ({ task, tasks, setTasks }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
+                    toast.success('Edited Successfully!');
                     setTasks(tasks.map(task => task._id === id ? { ...task, taskName: editTask } : task));
                     setEdit(false);
                 }
@@ -89,15 +93,20 @@ const SingleTask = ({ task, tasks, setTasks }) => {
 
     return (
         <>
-            <form className='single-task flex items-center justify-between px-4 h-12 md:h-16 rounded-lg mx-2' onSubmit={(e) => handleEdit(e, task._id)}>
+            <form className='relative single-task flex items-center justify-between px-4 h-12 md:h-16 rounded-lg mx-2' onSubmit={(e) => handleEdit(e, task._id)}>
+                {
+                    // image notification
+                    task.image &&
+                    <small className='text-center text-white absolute right-2 top-[-6px] w-8 h-5 bg-blue-700 border border-blue-900 rounded-full'>img</small>
+            }
                 {
                     edit ?
                         <input className='flex-1 mr-4 h-[80%] px-2 rounded-lg' type="text" value={editTask} onChange={(e) => setEditTask(e.target.value)} />
                         :
                         task.isCompleted ?
-                            <s className="flex-1 mr-4 font-bold text-2xl">{task.taskName}</s>
+                            <s className="flex-1 mr-4 font-bold text-xl">{task.taskName}</s>
                             :
-                            <span className="flex-1 mr-4 font-bold text-2xl">{task.taskName}</span>
+                            <span className="flex-1 mr-4 font-bold text-xl">{task.taskName}</span>
                 }
                 <div className=' relative text-2xl flex gap-2 '>
                     {!task.isCompleted &&

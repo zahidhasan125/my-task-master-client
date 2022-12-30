@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const AddTask = () => {
     const [newTask, setNewTask] = useState('');
@@ -30,7 +31,7 @@ const AddTask = () => {
                             .then(res => res.json())
                             .then(data => {
                                 if (data.acknowledged) {
-                                    alert('Added Successfully');
+                                    toast.success('Added Successfully');
                                     setNewTask('');
                                     e.target.reset();
                                 }
@@ -55,7 +56,7 @@ const AddTask = () => {
                 .then(res => res.json())
                 .then(data => {
                     if (data.acknowledged) {
-                        alert('Added Successfully');
+                        toast.success('Added Successfully!');
                         setNewTask('');
                         e.target.reset();
                     }
@@ -70,18 +71,19 @@ const AddTask = () => {
     }
     return (
         <form className='w-full md:w-[95%] max-w-7xl mx-auto' onSubmit={e => handleAddTask(e)}>
+            
             <div className='w-full mx-auto flex flex-col justify-center items-center'>
                 <input
                     type="text"
                     ref={inputRef}
                     onChange={e => setNewTask(e.target.value)}
                     value={newTask}
-                    className='h-16 w-full rounded-full pl-4 text-2xl border-none shadow-[inset_0_0_5px_#000] focus:outline-0 focus:shadow-[0_0_10px_1000px_rgba(0, 0, 0, 0.5)]'
+                    className='h-16 w-full rounded-full dark:bg-gray-700 pl-4 text-2xl border-none shadow-[inset_0_0_5px_#000] focus:outline-0 focus:shadow-[0_0_10px_1000px_rgba(0, 0, 0, 0.5)]'
                     placeholder='Enter your task'
                 />
-                {/* <input type="file" className='' /> */}
-                <div>
-                    <label className="pl-3 font-bold">Select Image </label><small>(Optional)</small>
+
+                <div className='mt-4'>
+                    <label className="pl-3 font-bold dark:text-slate-300">Select Image </label><small className='dark:text-slate-300'>(Optional)</small>
                     <input name='image' className="block mb-4 w-full text-lg text-gray-900 border border-gray-300 rounded-full pl-3 cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file"></input>
                 </div>
                 <button
